@@ -443,26 +443,11 @@ class NavigationButtons extends StatelessWidget {
                 ),
               ],
             ),
-            child: ElevatedButton(
+              child: ElevatedButton(
               onPressed: () {
                 HapticFeedback.mediumImpact();
-                Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                    pageBuilder: (context, animation, secondaryAnimation) =>
-                        AudioScreen(startTime: startTime),
-                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                      return SlideTransition(
-                        position: Tween<Offset>(
-                          begin: const Offset(1.0, 0.0),
-                          end: Offset.zero,
-                        ).animate(animation),
-                        child: child,
-                      );
-                    },
-                    transitionDuration: const Duration(milliseconds: 300),
-                  ),
-                );
+                // Return to menu instead of navigating to another page
+                Navigator.pop(context);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.transparent,
@@ -499,20 +484,11 @@ class NavigationButtons extends StatelessWidget {
           Container(
             width: double.infinity,
             height: 48,
-            child: TextButton(
+              child: TextButton(
               onPressed: () {
                 HapticFeedback.selectionClick();
-                Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                    pageBuilder: (context, animation, secondaryAnimation) =>
-                        FinishScreen(startTime: startTime),
-                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                      return FadeTransition(opacity: animation, child: child);
-                    },
-                    transitionDuration: const Duration(milliseconds: 300),
-                  ),
-                );
+                // Finish session: return to menu
+                Navigator.pop(context);
               },
               style: TextButton.styleFrom(
                 backgroundColor: Colors.white,
