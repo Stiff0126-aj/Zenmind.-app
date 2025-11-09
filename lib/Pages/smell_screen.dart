@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../theme/app_colors.dart';
 
 class SmellScreen extends StatelessWidget {
   final DateTime startTime;
@@ -28,15 +29,6 @@ class SmellScreen extends StatelessWidget {
               'assets/Smell/F2.png',
               width: screenWidth * 0.40,
               height: screenHeight * 0.40,
-            ),
-          ),
-          Positioned(
-            top: screenHeight * 0.44,
-            left: screenWidth * -0.08,
-            child: Image.asset(
-              'assets/Smell/F3.png',
-              width: screenWidth * 0.375,
-              height: screenHeight * 0.1875,
             ),
           ),
           Positioned(
@@ -97,7 +89,7 @@ class SmellScreen extends StatelessWidget {
                         letterSpacing: 1.3,
                         fontSize: 30,
                         fontWeight: FontWeight.w900,
-                        color: Color(0xff0F073E),
+                        color: AppColors.primary,
                       ),
                     ),
                     const SizedBox(height: 10),
@@ -108,7 +100,7 @@ class SmellScreen extends StatelessWidget {
                         letterSpacing: 1.0,
                         fontSize: 16,
                         fontWeight: FontWeight.w800,
-                        color: Colors.grey[700],
+                        color: AppColors.textDark,
                       ),
                     ),
                   ],
@@ -127,13 +119,13 @@ class SmellScreen extends StatelessWidget {
                         Navigator.pop(context);
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xff0F073E),
+                        backgroundColor: AppColors.primary,
                         elevation: 9,
                       ),
                       child: const Text(
                         'Next',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: AppColors.textLight,
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
                         ),

@@ -4,6 +4,7 @@ import 'package:panicaid/Animations/breathing_cloud.dart';
 // imports removed: breathing screen no longer navigates forward
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../theme/app_colors.dart';
 
 class BreathingScreen extends StatefulWidget {
   final DateTime startTime;
@@ -22,9 +23,9 @@ class _BreathingScreenState extends State<BreathingScreen> with TickerProviderSt
 
   // Color schemes for different breathing phases
   final Map<String, Color> _phaseColors = {
-    'INHALE': const Color(0xFF6C63FF),
-    'HOLD': const Color(0xFF00D4AA),
-    'EXHALE': const Color(0xFF4ECDC4),
+    'INHALE': AppColors.primary,
+    'HOLD': AppColors.secondary,
+    'EXHALE': AppColors.border,
   };
 
   @override
@@ -106,7 +107,7 @@ class _BreathingScreenState extends State<BreathingScreen> with TickerProviderSt
                 colors: [
                   (_backgroundColorAnimation.value ?? _phaseColors['INHALE']!).withOpacity(0.1),
                   (_backgroundColorAnimation.value ?? _phaseColors['INHALE']!).withOpacity(0.05),
-                  Colors.white,
+                  AppColors.background,
                 ],
                 stops: const [0.0, 0.3, 1.0],
               ),
@@ -191,11 +192,11 @@ class _BreathingScreenState extends State<BreathingScreen> with TickerProviderSt
           // Back button
           Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: AppColors.surface,
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
+                  color: AppColors.border.withOpacity(0.2),
                   blurRadius: 10,
                   offset: const Offset(0, 2),
                 ),
@@ -204,7 +205,7 @@ class _BreathingScreenState extends State<BreathingScreen> with TickerProviderSt
             child: IconButton(
               onPressed: () => Navigator.pop(context),
               icon: const Icon(Icons.arrow_back_ios_new_rounded),
-              color: Colors.grey[700],
+              color: AppColors.textDark,
             ),
           ),
 
@@ -218,14 +219,14 @@ class _BreathingScreenState extends State<BreathingScreen> with TickerProviderSt
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
-                  color: Colors.grey[800],
+                  color: AppColors.textDark,
                 ),
               ),
               Text(
                 'Find your calm',
                 style: TextStyle(
                   fontSize: 12,
-                  color: Colors.grey[600],
+                  color: AppColors.textDark.withOpacity(0.7),
                 ),
               ),
             ],
@@ -237,11 +238,11 @@ class _BreathingScreenState extends State<BreathingScreen> with TickerProviderSt
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: AppColors.surface,
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
+                  color: AppColors.border.withOpacity(0.2),
                   blurRadius: 10,
                   offset: const Offset(0, 2),
                 ),
@@ -253,7 +254,7 @@ class _BreathingScreenState extends State<BreathingScreen> with TickerProviderSt
                 Icon(
                   Icons.timer_outlined,
                   size: 16,
-                  color: Colors.grey[600],
+                  color: AppColors.textDark.withOpacity(0.7),
                 ),
                 const SizedBox(width: 4),
                 Text(
@@ -261,7 +262,7 @@ class _BreathingScreenState extends State<BreathingScreen> with TickerProviderSt
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
-                    color: Colors.grey[700],
+                    color: AppColors.textDark,
                   ),
                 ),
               ],
@@ -283,11 +284,11 @@ class BreathingPhases extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 20),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.08),
+            color: AppColors.border.withOpacity(0.2),
             blurRadius: 20,
             offset: const Offset(0, 4),
           ),
@@ -300,35 +301,35 @@ class BreathingPhases extends StatelessWidget {
               child: BreathingPhaseWidget(
                 duration: '3',
                 phase: 'INHALE',
-                color: Color(0xFF6C63FF),
+                color: AppColors.primary,
                 icon: Icons.keyboard_arrow_up_rounded,
               ),
             ),
             Container(
               width: 1,
               height: 60,
-              color: Colors.grey[300],
+              color: AppColors.border.withOpacity(0.3),
               margin: const EdgeInsets.symmetric(horizontal: 16),
             ),
             const Expanded(
               child: BreathingPhaseWidget(
                 duration: '3',
                 phase: 'HOLD',
-                color: Color(0xFF00D4AA),
+                color: AppColors.secondary,
                 icon: Icons.pause_rounded,
               ),
             ),
             Container(
               width: 1,
               height: 60,
-              color: Colors.grey[300],
+              color: AppColors.border.withOpacity(0.3),
               margin: const EdgeInsets.symmetric(horizontal: 16),
             ),
             const Expanded(
               child: BreathingPhaseWidget(
                 duration: '3',
                 phase: 'EXHALE',
-                color: Color(0xFF4ECDC4),
+                color: AppColors.border,
                 icon: Icons.keyboard_arrow_down_rounded,
               ),
             ),
@@ -382,7 +383,7 @@ class BreathingPhaseWidget extends StatelessWidget {
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w700,
-            color: Colors.grey[800],
+            color: AppColors.textDark,
           ),
         ),
 
@@ -391,7 +392,7 @@ class BreathingPhaseWidget extends StatelessWidget {
           'Seconds',
           style: TextStyle(
             fontSize: 10,
-            color: Colors.grey[600],
+            color: AppColors.textDark.withOpacity(0.7),
             fontWeight: FontWeight.w500,
           ),
         ),
@@ -430,13 +431,13 @@ class NavigationButtons extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
               gradient: const LinearGradient(
-                colors: [Color(0xFF6C63FF), Color(0xFF4F46E5)],
+                colors: AppColors.primaryGradient,
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
               ),
               boxShadow: [
                 BoxShadow(
-                  color: const Color(0xFF6C63FF).withOpacity(0.3),
+                  color: AppColors.primary.withOpacity(0.3),
                   blurRadius: 20,
                   offset: const Offset(0, 8),
                 ),
@@ -461,7 +462,7 @@ class NavigationButtons extends StatelessWidget {
                   Text(
                     'Continue to Audio',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: AppColors.textLight,
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
                     ),
@@ -469,7 +470,7 @@ class NavigationButtons extends StatelessWidget {
                   SizedBox(width: 8),
                   Icon(
                     Icons.arrow_forward_rounded,
-                    color: Colors.white,
+                    color: AppColors.textLight,
                     size: 20,
                   ),
                 ],
@@ -490,11 +491,11 @@ class NavigationButtons extends StatelessWidget {
                 Navigator.pop(context);
               },
               style: TextButton.styleFrom(
-                backgroundColor: Colors.white,
+                backgroundColor: AppColors.surface,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                   side: BorderSide(
-                    color: Colors.grey[300]!,
+                    color: AppColors.border.withOpacity(0.5),
                     width: 1,
                   ),
                 ),
@@ -504,14 +505,14 @@ class NavigationButtons extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.check_circle_outline_rounded,
-                    color: Colors.grey[600],
+                    color: AppColors.textDark.withOpacity(0.7),
                     size: 20,
                   ),
                   const SizedBox(width: 8),
                   Text(
                     'Finish Session',
                     style: TextStyle(
-                      color: Colors.grey[700],
+                      color: AppColors.textDark,
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
                     ),

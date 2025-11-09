@@ -1,6 +1,7 @@
 // ignore_for_file: sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
+import '../theme/app_colors.dart';
 
 class TasteScreen extends StatelessWidget {
   final DateTime startTime;
@@ -84,7 +85,7 @@ class TasteScreen extends StatelessWidget {
                             letterSpacing: 1.3,
                             fontSize: 30,
                             fontWeight: FontWeight.w900,
-                            color: Color(0xff0F073E),
+                            color: AppColors.primary,
                           ),
                         ),
                         const SizedBox(height: 10),
@@ -95,7 +96,7 @@ class TasteScreen extends StatelessWidget {
                             letterSpacing: 1.0,
                             fontSize: 16,
                             fontWeight: FontWeight.w800,
-                            color: Colors.grey[700],
+                            color: AppColors.textDark,
                           ),
                         ),
                       ],
@@ -113,13 +114,13 @@ class TasteScreen extends StatelessWidget {
                             Navigator.pop(context);
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xff0F073E),
+                            backgroundColor: AppColors.primary,
                             elevation: 9,
                           ),
                           child: const Text(
                             'Next',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: AppColors.textLight,
                               fontSize: 25,
                               fontWeight: FontWeight.bold,
                             ),

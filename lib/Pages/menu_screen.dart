@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../theme/app_colors.dart';
 import 'audio_screen.dart';
 import 'breathing_screen.dart';
 import 'bubble_pop_game_screen.dart';
@@ -23,42 +24,42 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
       title: 'Breathing Exercise',
       subtitle: 'Guided breathing techniques',
       icon: Icons.air_rounded,
-      color: const Color(0xFF667eea),
+      color: AppColors.primary,
       route: (startTime) => BreathingScreen(startTime: startTime),
     ),
     MenuOption(
       title: 'Calming Sounds',
       subtitle: 'Relaxing audio therapy',
       icon: Icons.music_note_rounded,
-      color: const Color(0xFF4FC3F7),
+      color: AppColors.primary.withOpacity(0.9),
       route: (startTime) => AudioScreen(startTime: startTime),
     ),
     MenuOption(
       title: 'Vibration Therapy',
       subtitle: 'Soothing haptic patterns',
       icon: Icons.vibration_rounded,
-      color: const Color(0xFFFF7043),
+      color: AppColors.primary.withOpacity(0.8),
       route: (startTime) => VibrationScreen(startTime: startTime),
     ),
     MenuOption(
       title: 'Bubble Pop Game',
       subtitle: 'Interactive distraction',
       icon: Icons.bubble_chart_rounded,
-      color: const Color(0xFF66BB6A),
+      color: AppColors.primary.withOpacity(0.85),
       route: (startTime) => BubblePopGameScreen(),
     ),
     MenuOption(
       title: 'Smell Exercise',
       subtitle: 'Mindful scent awareness',
       icon: Icons.local_florist_rounded,
-      color: const Color(0xFF8D6E63),
+      color: AppColors.primary.withOpacity(0.75),
       route: (startTime) => SmellScreen(startTime: startTime),
     ),
     MenuOption(
       title: 'Taste Exercise',
       subtitle: 'Sensory grounding technique',
       icon: Icons.restaurant_rounded,
-      color: const Color(0xFFFF9800),
+      color: AppColors.primary.withOpacity(0.7),
       route: (startTime) => TasteScreen(startTime: startTime),
     ),
   ];
@@ -92,14 +93,11 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [
-              Color(0xFF667eea),
-              Color(0xFF764ba2),
-            ],
+            colors: AppColors.backgroundGradient,
           ),
         ),
         child: SafeArea(
@@ -118,7 +116,7 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
                     style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white.withOpacity(0.95),
+                      color: AppColors.textDark,
                     ),
                   ),
                   
@@ -128,7 +126,7 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
                     'Choose your calming technique',
                     style: TextStyle(
                       fontSize: 16,
-                      color: Colors.white.withOpacity(0.8),
+                      color: AppColors.textDark.withOpacity(0.8),
                     ),
                   ),
 
@@ -177,67 +175,85 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
           ),
         );
       },
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 10,
-              offset: const Offset(0, 4),
-            ),
-          ],
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Icon container
-            Container(
-              padding: const EdgeInsets.all(15),
+      child: option.title == 'Breathing Exercise'
+          ? Container(
+              // Special rendering: use a full-bleed image for the Breathing card
               decoration: BoxDecoration(
-                color: option.color.withOpacity(0.1),
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                option.icon,
-                size: 32,
-                color: option.color,
-              ),
-            ),
-
-            const SizedBox(height: 15),
-
-            // Title
-            Text(
-              option.title,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF2D3436),
-              ),
-              textAlign: TextAlign.center,
-            ),
-
-            const SizedBox(height: 5),
-
-            // Subtitle
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Text(
-                option.subtitle,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.grey[600],
+                borderRadius: BorderRadius.circular(20),
+                image: const DecorationImage(
+                  image: AssetImage('assets/images/breathing_button.png'),
+                  fit: BoxFit.cover,
                 ),
-                textAlign: TextAlign.center,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.border.withOpacity(0.3),
+                    blurRadius: 10,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+            )
+          : Container(
+              decoration: BoxDecoration(
+                color: AppColors.surface,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.border.withOpacity(0.3),
+                    blurRadius: 10,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Icon container
+                  Container(
+                    padding: const EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                      color: option.color.withOpacity(0.1),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      option.icon,
+                      size: 32,
+                      color: option.color,
+                    ),
+                  ),
+
+                  const SizedBox(height: 15),
+
+                  // Title
+                  Text(
+                    option.title,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.textDark,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+
+                  const SizedBox(height: 5),
+
+                  // Subtitle
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Text(
+                      option.subtitle,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: AppColors.textDark.withOpacity(0.6),
+                      ),
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
-      ),
     );
   }
 }

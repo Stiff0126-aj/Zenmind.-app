@@ -5,6 +5,7 @@ import '../Animations/audio_spectrum_lines.dart';
 import '../Buttons/audio_player_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../theme/app_colors.dart';
 
 class AudioScreen extends StatefulWidget {
   final DateTime startTime;
@@ -44,12 +45,12 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
 
   // Sound-specific colors and icons
   final Map<String, Color> soundColors = {
-    'Waves': const Color(0xFF4FC3F7),
-    'Rain': const Color(0xFF42A5F5),
-    'Birds': const Color(0xFF66BB6A),
-    'Fire': const Color(0xFFFF7043),
-    'Forest': const Color(0xFF8BC34A),
-    'Wind': const Color(0xFF90A4AE),
+    'Waves': AppColors.primary,
+    'Rain': AppColors.border,
+    'Birds': AppColors.primary,
+    'Fire': AppColors.secondary,
+    'Forest': AppColors.border,
+    'Wind': AppColors.primary,
   };
 
   final Map<String, IconData> soundIcons = {
@@ -119,7 +120,7 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;
-    final currentColor = soundColors[soundTexts[currentSoundIndex]] ?? const Color(0xFF4FC3F7);
+    final currentColor = soundColors[soundTexts[currentSoundIndex]] ?? AppColors.primary;
 
     return Scaffold(
       body: Container(
@@ -130,7 +131,7 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
             colors: [
               currentColor.withOpacity(0.05),
               currentColor.withOpacity(0.02),
-              Colors.white,
+              AppColors.background,
             ],
             stops: const [0.0, 0.3, 1.0],
           ),
@@ -187,11 +188,11 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
           // Back button
           Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: AppColors.surface,
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
+                  color: AppColors.textDark.withOpacity(0.1),
                   blurRadius: 10,
                   offset: const Offset(0, 2),
                 ),
@@ -200,7 +201,7 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
             child: IconButton(
               onPressed: () => Navigator.pop(context),
               icon: const Icon(Icons.arrow_back_ios_new_rounded),
-              color: Colors.grey[700],
+              color: AppColors.textDark,
             ),
           ),
 
@@ -214,14 +215,14 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
-                  color: Colors.grey[800],
+                  color: AppColors.textDark,
                 ),
               ),
               Text(
                 'Calming sounds',
                 style: TextStyle(
                   fontSize: 12,
-                  color: Colors.grey[600],
+                  color: AppColors.textDark.withOpacity(0.7),
                 ),
               ),
             ],
@@ -276,7 +277,7 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
               Text(
                 'Focus on',
                 style: TextStyle(
-                  color: Colors.grey[800],
+                  color: AppColors.textDark,
                   fontSize: 24,
                   fontWeight: FontWeight.w400,
                 ),
@@ -319,7 +320,7 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
                       style: const TextStyle(
                         fontSize: 32,
                         fontWeight: FontWeight.w700,
-                        color: Colors.white,
+                        color: AppColors.textLight,
                         letterSpacing: 1,
                       ),
                     ),
@@ -354,7 +355,7 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
             offset: const Offset(0, 8),
           ),
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: AppColors.textDark.withOpacity(0.05),
             spreadRadius: 0,
             blurRadius: 10,
             offset: const Offset(0, 2),
@@ -398,7 +399,7 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: Colors.grey[100],
+                  color: AppColors.surface,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
@@ -472,7 +473,7 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
                   Text(
                     'Continue to Vibration',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: AppColors.textLight,
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
                     ),
@@ -480,7 +481,7 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
                   SizedBox(width: 8),
                   Icon(
                     Icons.arrow_forward_rounded,
-                    color: Colors.white,
+                    color: AppColors.textLight,
                     size: 20,
                   ),
                 ],
@@ -503,11 +504,11 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
                 Navigator.pop(context);
               },
               style: TextButton.styleFrom(
-                backgroundColor: Colors.white,
+                  backgroundColor: AppColors.surface,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                   side: BorderSide(
-                    color: Colors.grey[300]!,
+                    color: AppColors.border.withOpacity(0.3),
                     width: 1,
                   ),
                 ),

@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import '../theme/app_colors.dart';
 
 class AudioSpectrumLines extends StatefulWidget {
   final bool isPlaying; // Add a boolean to control the animation state
@@ -72,7 +73,7 @@ class _AudioSpectrumLinesState extends State<AudioSpectrumLines>
               height: animations[index].value,
               width: 16,
               decoration: BoxDecoration(
-                color: const Color(0xff0F073E),
+                color: AppColors.primary,
                 borderRadius: BorderRadius.circular(9999),
               ),
             );

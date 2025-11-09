@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rive/rive.dart' hide LinearGradient, RadialGradient;
+import '../theme/app_colors.dart';
 import 'package:vibration/vibration.dart';
 
 class VibrationScreen extends StatefulWidget {
@@ -124,14 +125,14 @@ class _VibrationScreenState extends State<VibrationScreen> with TickerProviderSt
 
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Color(0xFFE8EAF6),
-              Color(0xFFF3E5F5),
-              Colors.white,
+              AppColors.primary.withOpacity(0.1),
+              AppColors.secondary.withOpacity(0.1),
+              AppColors.background,
             ],
             stops: [0.0, 0.5, 1.0],
           ),
@@ -196,11 +197,11 @@ class _VibrationScreenState extends State<VibrationScreen> with TickerProviderSt
           // Back button
           Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: AppColors.surface,
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
+                  color: AppColors.primary.withOpacity(0.1),
                   blurRadius: 10,
                   offset: const Offset(0, 2),
                 ),
@@ -212,7 +213,7 @@ class _VibrationScreenState extends State<VibrationScreen> with TickerProviderSt
                 Navigator.pop(context);
               },
               icon: const Icon(Icons.arrow_back_ios_new_rounded),
-              color: Colors.grey[700],
+              color: AppColors.textDark,
             ),
           ),
 
@@ -226,14 +227,14 @@ class _VibrationScreenState extends State<VibrationScreen> with TickerProviderSt
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
-                  color: Colors.grey[800],
+                  color: AppColors.textDark,
                 ),
               ),
               Text(
                 'Feel the rhythm',
                 style: TextStyle(
                   fontSize: 12,
-                  color: Colors.grey[600],
+                  color: AppColors.textDark.withOpacity(0.6),
                 ),
               ),
             ],
@@ -245,14 +246,10 @@ class _VibrationScreenState extends State<VibrationScreen> with TickerProviderSt
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
-              color: _vibrating
-                  ? const Color(0xFF9C27B0).withOpacity(0.1)
-                  : Colors.grey.withOpacity(0.1),
+              color: (_vibrating ? AppColors.primary : AppColors.secondary).withOpacity(0.1),
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: _vibrating
-                    ? const Color(0xFF9C27B0).withOpacity(0.3)
-                    : Colors.grey.withOpacity(0.3),
+                color: (_vibrating ? AppColors.primary : AppColors.secondary).withOpacity(0.3),
                 width: 1,
               ),
             ),
@@ -262,7 +259,7 @@ class _VibrationScreenState extends State<VibrationScreen> with TickerProviderSt
                 Icon(
                   _vibrating ? Icons.vibration_rounded : Icons.pause_rounded,
                   size: 16,
-                  color: _vibrating ? const Color(0xFF9C27B0) : Colors.grey[600],
+                  color: _vibrating ? AppColors.primary : AppColors.textDark.withOpacity(0.6),
                 ),
                 const SizedBox(width: 4),
                 Text(
@@ -270,7 +267,7 @@ class _VibrationScreenState extends State<VibrationScreen> with TickerProviderSt
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
-                    color: _vibrating ? const Color(0xFF9C27B0) : Colors.grey[600],
+                    color: _vibrating ? AppColors.primary : AppColors.textDark.withOpacity(0.6),
                   ),
                 ),
               ],
@@ -365,24 +362,24 @@ class _VibrationScreenState extends State<VibrationScreen> with TickerProviderSt
               maxHeight: 400,
             ),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: AppColors.surface,
               borderRadius: BorderRadius.circular(24),
               boxShadow: [
                 BoxShadow(
-                  color: const Color(0xFF9C27B0).withOpacity(_vibrating ? 0.3 : 0.1),
+                  color: AppColors.primary.withOpacity(_vibrating ? 0.3 : 0.1),
                   spreadRadius: _vibrating ? 2 : 0,
                   blurRadius: _vibrating ? 30 : 15,
                   offset: const Offset(0, 8),
                 ),
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
+                  color: AppColors.primary.withOpacity(0.05),
                   spreadRadius: 0,
                   blurRadius: 10,
                   offset: const Offset(0, 2),
                 ),
               ],
               border: Border.all(
-                color: const Color(0xFF9C27B0).withOpacity(_vibrating ? 0.2 : 0.1),
+                color: AppColors.primary.withOpacity(_vibrating ? 0.2 : 0.1),
                 width: _vibrating ? 2 : 1,
               ),
             ),
@@ -433,8 +430,8 @@ class _VibrationScreenState extends State<VibrationScreen> with TickerProviderSt
         shape: BoxShape.circle,
         gradient: LinearGradient(
           colors: _vibrating
-              ? [const Color(0xFFFF5722), const Color(0xFFE91E63)]
-              : [const Color(0xFF4CAF50), const Color(0xFF2E7D32)],
+              ? [AppColors.primary, AppColors.secondary]
+              : [AppColors.secondary, AppColors.primary],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -463,10 +460,10 @@ class _VibrationScreenState extends State<VibrationScreen> with TickerProviderSt
       margin: const EdgeInsets.symmetric(horizontal: 40),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.8),
+        color: AppColors.surface.withOpacity(0.8),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: Colors.grey.withOpacity(0.2),
+          color: AppColors.secondary.withOpacity(0.2),
           width: 1,
         ),
       ),
@@ -504,13 +501,13 @@ class _VibrationScreenState extends State<VibrationScreen> with TickerProviderSt
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
               gradient: const LinearGradient(
-                colors: [Color(0xFF9C27B0), Color(0xFF673AB7)],
+                colors: [AppColors.primary, AppColors.secondary],
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
               ),
               boxShadow: [
                 BoxShadow(
-                  color: const Color(0xFF9C27B0).withOpacity(0.3),
+                  color: AppColors.primary.withOpacity(0.3),
                   blurRadius: 20,
                   offset: const Offset(0, 8),
                 ),
@@ -566,11 +563,11 @@ class _VibrationScreenState extends State<VibrationScreen> with TickerProviderSt
                 Navigator.pop(context);
               },
               style: TextButton.styleFrom(
-                backgroundColor: Colors.white,
+                backgroundColor: AppColors.surface,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                   side: BorderSide(
-                    color: Colors.grey[300]!,
+                    color: AppColors.secondary.withOpacity(0.3),
                     width: 1,
                   ),
                 ),
@@ -580,14 +577,14 @@ class _VibrationScreenState extends State<VibrationScreen> with TickerProviderSt
                 children: [
                   Icon(
                     Icons.check_circle_outline_rounded,
-                    color: Colors.grey[600],
+                    color: AppColors.textDark.withOpacity(0.6),
                     size: 20,
                   ),
                   const SizedBox(width: 8),
                   Text(
                     'Finish Session',
                     style: TextStyle(
-                      color: Colors.grey[700],
+                      color: AppColors.textDark,
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
                     ),
