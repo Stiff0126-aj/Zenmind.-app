@@ -62,6 +62,14 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
       color: AppColors.primary.withOpacity(0.7),
       route: (startTime) => TasteScreen(startTime: startTime),
     ),
+    MenuOption(
+      title: 'Flash Cards',
+      subtitle: 'Learn the PAP Protocol',
+      icon: Icons.style_rounded,
+      color: AppColors.primary.withOpacity(0.7),
+      route: (startTime) => const FlashcardsScreen(),
+  ),
+
   ];
 
   @override
