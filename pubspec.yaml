@@ -90,6 +90,7 @@ flutter:
     #------------------------------------
     - assets/Smell/F1.png
     - assets/Smell/F2.png
+  - assets/images/breathing_button.png
   # - assets/icon/app_icon.png  # disabled until the file exists; place your icon at this path to enable
     - assets/Smell/F4.png
     - assets/Smell/F5.png
