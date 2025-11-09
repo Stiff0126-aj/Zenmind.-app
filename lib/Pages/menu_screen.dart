@@ -114,7 +114,7 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
                   
                   // Header
                   Text(
-                    'Panic Aid',
+                    'ZenMind',
                     style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,

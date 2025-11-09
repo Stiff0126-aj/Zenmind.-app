@@ -2,7 +2,7 @@
 
 // ignore_for_file: sized_box_for_whitespace
 
-import 'package:panicaid/Pages/start_screen.dart';
+import 'package:panicaid/Pages/menu_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -515,11 +515,12 @@ class _FinishScreenState extends State<FinishScreen>
           child: ElevatedButton(
             onPressed: () {
               HapticFeedback.mediumImpact();
+              // Return to menu and clear stack so menu is the root
               Navigator.pushAndRemoveUntil(
                 context,
                 PageRouteBuilder(
                   pageBuilder: (context, animation, secondaryAnimation) =>
-                  const StartScreen(),
+                  const MenuScreen(),
                   transitionsBuilder: (context, animation, secondaryAnimation, child) {
                     return FadeTransition(
                       opacity: animation,

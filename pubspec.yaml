@@ -47,6 +47,9 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
 
+  # Add the launcher icon generator (dev dependency) so we can generate app icons
+  flutter_launcher_icons: ^0.10.0
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -87,7 +90,7 @@ flutter:
     #------------------------------------
     - assets/Smell/F1.png
     - assets/Smell/F2.png
-    - assets/Smell/F3.png
+  # - assets/icon/app_icon.png  # disabled until the file exists; place your icon at this path to enable
     - assets/Smell/F4.png
     - assets/Smell/F5.png
     - assets/Smell/F6.png
@@ -119,3 +122,15 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  # If you place the new launcher PNG at assets/icon/app_icon.png it will be
+  # used by flutter_launcher_icons when you run the generator.
+  # Add the icon asset to the project's assets so Flutter includes it.
+  #    - assets/icon/app_icon.png
+
+# Configuration for flutter_launcher_icons
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/app_icon.png"
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/icon/app_icon.png"

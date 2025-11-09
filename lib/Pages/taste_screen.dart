@@ -1,7 +1,5 @@
 // ignore_for_file: sized_box_for_whitespace
 
-import 'package:panicaid/Pages/finish_screen.dart';
-import 'package:panicaid/Pages/smell_screen.dart';
 import 'package:flutter/material.dart';
 
 class TasteScreen extends StatelessWidget {
@@ -111,11 +109,8 @@ class TasteScreen extends StatelessWidget {
                         width: MediaQuery.of(context).size.width * 0.45,
                         child: ElevatedButton(
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SmellScreen(startTime: startTime)),
-                            );
+                            // Return to menu instead of navigating forward
+                            Navigator.pop(context);
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xff0F073E),
@@ -133,11 +128,8 @@ class TasteScreen extends StatelessWidget {
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => FinishScreen(startTime: startTime)),
-                          );
+                          // Finish session: return to menu
+                          Navigator.pop(context);
                         },
                         child: const Text('Finish Session'),
                       ),

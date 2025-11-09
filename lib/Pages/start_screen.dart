@@ -1,14 +1,7 @@
 // ignore_for_file: sized_box_for_whitespace
 
-import 'dart:math';
-
-import 'package:panicaid/Pages/breathing_screen.dart';
-import 'package:flutter/material.dart';
-
-// main.dart - Updated app structure
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'dart:math';
 
 
 // Onboarding Flow
@@ -441,18 +434,8 @@ class _StartScreenState extends State<StartScreen> with TickerProviderStateMixin
                     child: ElevatedButton(
                       onPressed: () {
                         HapticFeedback.mediumImpact();
-                        final startTime = DateTime.now();
-                        Navigator.push(
-                          context,
-                          PageRouteBuilder(
-                            pageBuilder: (context, animation, secondaryAnimation) =>
-                                BreathingScreen(startTime: startTime),
-                            transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                              return FadeTransition(opacity: animation, child: child);
-                            },
-                            transitionDuration: const Duration(milliseconds: 300),
-                          ),
-                        );
+                        // Opened from menu: return to menu when pressing Get Started
+                        Navigator.pop(context);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.transparent,

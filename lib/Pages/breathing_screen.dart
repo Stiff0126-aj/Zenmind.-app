@@ -1,8 +1,7 @@
 // ignore_for_file: sized_box_for_whitespace
 
 import 'package:panicaid/Animations/breathing_cloud.dart';
-import 'package:panicaid/Pages/audio_screen.dart';
-import 'package:panicaid/Pages/finish_screen.dart';
+// imports removed: breathing screen no longer navigates forward
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

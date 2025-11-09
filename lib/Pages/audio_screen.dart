@@ -3,17 +3,6 @@
 import 'package:audioplayers/audioplayers.dart';
 import '../Animations/audio_spectrum_lines.dart';
 import '../Buttons/audio_player_buttons.dart';
-import '../Pages/finish_screen.dart';
-import '../Pages/vibration_screen.dart';
-import 'package:flutter/material.dart';
-
-// ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously
-
-import 'package:audioplayers/audioplayers.dart';
-import '../Animations/audio_spectrum_lines.dart';
-import '../Buttons/audio_player_buttons.dart';
-import '../Pages/finish_screen.dart';
-import '../Pages/vibration_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -467,23 +456,8 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
                 HapticFeedback.mediumImpact();
                 await player.stop();
                 if (!mounted) return;
-                Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                    pageBuilder: (context, animation, secondaryAnimation) =>
-                        VibrationScreen(startTime: widget.startTime),
-                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                      return SlideTransition(
-                        position: Tween<Offset>(
-                          begin: const Offset(1.0, 0.0),
-                          end: Offset.zero,
-                        ).animate(animation),
-                        child: child,
-                      );
-                    },
-                    transitionDuration: const Duration(milliseconds: 300),
-                  ),
-                );
+                // Return to menu instead of navigating to vibration
+                Navigator.pop(context);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.transparent,
@@ -525,17 +499,8 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
                 HapticFeedback.selectionClick();
                 await player.stop();
                 if (!mounted) return;
-                Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                    pageBuilder: (context, animation, secondaryAnimation) =>
-                        FinishScreen(startTime: widget.startTime),
-                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                      return FadeTransition(opacity: animation, child: child);
-                    },
-                    transitionDuration: const Duration(milliseconds: 300),
-                  ),
-                );
+                // Finish session: return to menu
+                Navigator.pop(context);
               },
               style: TextButton.styleFrom(
                 backgroundColor: Colors.white,

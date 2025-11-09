@@ -1,4 +1,3 @@
-import 'package:panicaid/Pages/finish_screen.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:audioplayers/audioplayers.dart';
@@ -211,13 +210,9 @@ class _BubblePopGameScreenState extends State<BubblePopGameScreen> {
                     width: MediaQuery.of(context).size.width * 0.45,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => FinishScreen(startTime: DateTime.now()),
-                          ),
-                        );
-                      },
+                          // Return to menu instead of navigating forward
+                          Navigator.pop(context);
+                        },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xff0F073E),
                         elevation: 9,
@@ -234,13 +229,8 @@ class _BubblePopGameScreenState extends State<BubblePopGameScreen> {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              FinishScreen(startTime: DateTime.now()),
-                        ),
-                      );
+                      // Finish session: return to menu
+                      Navigator.pop(context);
                     },
                     child: const Text(
                       'Finish Session',

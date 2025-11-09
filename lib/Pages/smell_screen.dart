@@ -1,5 +1,3 @@
-import 'package:panicaid/Pages/bubble_pop_game_screen.dart';
-import 'package:panicaid/Pages/finish_screen.dart';
 import 'package:flutter/material.dart';
 
 class SmellScreen extends StatelessWidget {
@@ -123,14 +121,10 @@ class SmellScreen extends StatelessWidget {
                   Container(
                     height: 50,
                     width: MediaQuery.of(context).size.width * 0.45,
-                    child: ElevatedButton(
+                      child: ElevatedButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => BubblePopGameScreen(),
-                          ),
-                        );
+                        // Return to menu instead of navigating forward
+                        Navigator.pop(context);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xff0F073E),
@@ -148,13 +142,8 @@ class SmellScreen extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              FinishScreen(startTime: startTime),
-                        ),
-                      );
+                      // Finish session: return to menu
+                      Navigator.pop(context);
                     },
                     child: const Text('Finish Session'),
                   ),
