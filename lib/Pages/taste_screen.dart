@@ -110,15 +110,15 @@ class TasteScreen extends StatelessWidget {
                         width: MediaQuery.of(context).size.width * 0.45,
                         child: ElevatedButton(
                           onPressed: () {
-                            // Return to menu instead of navigating forward
-                            Navigator.pop(context);
+                            // End of sequence: return to main menu
+                            Navigator.popUntil(context, (route) => route.isFirst);
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.primary,
                             elevation: 9,
                           ),
                           child: const Text(
-                            'Next',
+                            'Finish',
                             style: TextStyle(
                               color: AppColors.textLight,
                               fontSize: 25,

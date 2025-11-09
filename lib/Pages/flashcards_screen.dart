@@ -126,18 +126,27 @@ class _FlashcardsScreenState extends State<FlashcardsScreen>
                     child: AnimatedBuilder(
                       animation: _controller,
                       builder: (context, child) {
-                        final angle = _controller.value * pi;
-                        final isUnder = (angle > pi / 2.0);
-                        final transform = Matrix4.identity()
-                          ..setEntry(3, 2, 0.001)
-                          ..rotateY(angle);
-                        return Transform(
-                          alignment: Alignment.center,
-                          transform: transform,
-                          child: isUnder
-                              ? _buildCardBack(current['back'])
-                              : _buildCardFront(current['front']),
-                        );
+                          final angle = _controller.value * pi;
+                          final isUnder = angle > pi / 2.0;
+
+                          // Apply perspective and rotateY by the animated angle
+                          final transform = Matrix4.identity()
+                            ..setEntry(3, 2, 0.001)
+                            ..rotateY(angle);
+
+                          // When showing the back side we add an extra pi rotation
+                          // to compensate for the mirrored text caused by the 3D flip.
+                          return Transform(
+                            alignment: Alignment.center,
+                            transform: transform,
+                            child: isUnder
+                                ? Transform(
+                                    alignment: Alignment.center,
+                                    transform: Matrix4.identity()..rotateY(pi),
+                                    child: _buildCardBack(current['back']),
+                                  )
+                                : _buildCardFront(current['front']),
+                          );
                       },
                     ),
                   ),

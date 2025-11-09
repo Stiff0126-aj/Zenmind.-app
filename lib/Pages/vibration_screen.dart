@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rive/rive.dart' hide LinearGradient, RadialGradient;
 import '../theme/app_colors.dart';
+import 'smell_screen.dart';
 import 'package:vibration/vibration.dart';
 
 class VibrationScreen extends StatefulWidget {
@@ -517,8 +518,13 @@ class _VibrationScreenState extends State<VibrationScreen> with TickerProviderSt
               onPressed: () {
                 HapticFeedback.mediumImpact();
                 stopVibration();
-                // Return to menu instead of navigating forward to Taste
-                Navigator.pop(context);
+                // Navigate to Smell screen next in the sequence
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => SmellScreen(startTime: widget.startTime),
+                  ),
+                );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.transparent,

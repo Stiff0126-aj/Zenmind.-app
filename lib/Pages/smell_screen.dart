@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
+import 'taste_screen.dart';
 
 class SmellScreen extends StatelessWidget {
   final DateTime startTime;
@@ -115,8 +116,13 @@ class SmellScreen extends StatelessWidget {
                     width: MediaQuery.of(context).size.width * 0.45,
                       child: ElevatedButton(
                       onPressed: () {
-                        // Return to menu instead of navigating forward
-                        Navigator.pop(context);
+                        // Navigate to Taste screen next in sequence
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => TasteScreen(startTime: startTime),
+                          ),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primary,

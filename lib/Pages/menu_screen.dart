@@ -5,7 +5,7 @@ import 'audio_screen.dart';
 import 'breathing_screen.dart';
 import 'bubble_pop_game_screen.dart';
 import 'smell_screen.dart';
-import 'taste_screen.dart';
+import 'flashcards_screen.dart';
 import 'vibration_screen.dart';
 
 class MenuScreen extends StatefulWidget {
@@ -55,13 +55,7 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
       color: AppColors.primary.withOpacity(0.75),
       route: (startTime) => SmellScreen(startTime: startTime),
     ),
-    MenuOption(
-      title: 'Taste Exercise',
-      subtitle: 'Sensory grounding technique',
-      icon: Icons.restaurant_rounded,
-      color: AppColors.primary.withOpacity(0.7),
-      route: (startTime) => TasteScreen(startTime: startTime),
-    ),
+    // 'Taste Exercise' removed from menu per user request
     MenuOption(
       title: 'Flash Cards',
       subtitle: 'Learn the PAP Protocol',
@@ -173,8 +167,8 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
       'Calming Sounds': 'assets/images/calming_sounds_button.png',
       'Vibration Therapy': 'assets/images/vibration_button.png',
       'Bubble Pop Game': 'assets/images/bubble_pop_button.png',
-      'Smell Exercise': 'assets/images/smell_button.png',
-      'Taste Exercise': 'assets/images/taste_button.png',
+  'Smell Exercise': 'assets/images/smell_button.png',
+      'Flash Cards': 'assets/images/flashcards_button.png',
     };
 
     final asset = images[option.title];

@@ -96,6 +96,7 @@ flutter:
     - assets/images/vibration_button.png
     - assets/images/smell_button.png
     - assets/images/taste_button.png
+    - assets/images/flashcards_button.png
   # - assets/icon/app_icon.png  # disabled until the file exists; place your icon at this path to enable
     - assets/Smell/F4.png
     - assets/Smell/F5.png

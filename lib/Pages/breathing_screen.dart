@@ -1,7 +1,7 @@
 // ignore_for_file: sized_box_for_whitespace
 
 import 'package:panicaid/Animations/breathing_cloud.dart';
-// imports removed: breathing screen no longer navigates forward
+import 'package:panicaid/Pages/vibration_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../theme/app_colors.dart';
@@ -426,14 +426,50 @@ class NavigationButtons extends StatelessWidget {
         children: [
           const SizedBox(height: 16),
 
-          // Secondary action button
+          // Primary action button: proceed to Vibration
+          Container(
+            width: double.infinity,
+            height: 56,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.border.withOpacity(0.15),
+                  blurRadius: 10,
+                  offset: const Offset(0, 6),
+                ),
+              ],
+            ),
+            child: ElevatedButton(
+              onPressed: () {
+                HapticFeedback.mediumImpact();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => VibrationScreen(startTime: startTime),
+                  ),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primary,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              ),
+              child: const Text(
+                'Next: Vibration',
+                style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 12),
+
+          // Secondary action button: finish session (back to menu)
           Container(
             width: double.infinity,
             height: 48,
-              child: TextButton(
+            child: TextButton(
               onPressed: () {
                 HapticFeedback.selectionClick();
-                // Finish session: return to menu
                 Navigator.pop(context);
               },
               style: TextButton.styleFrom(
