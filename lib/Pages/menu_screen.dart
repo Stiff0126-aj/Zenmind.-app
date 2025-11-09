@@ -159,6 +159,18 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
   }
 
   Widget _buildOptionCard(MenuOption option) {
+    // map option titles to image assets
+    final images = {
+      'Breathing Exercise': 'assets/images/breathing_button.png',
+      'Calming Sounds': 'assets/images/calming_sounds_button.png',
+      'Vibration Therapy': 'assets/images/vibration_button.png',
+      'Bubble Pop Game': 'assets/images/bubble_pop_button.png',
+      'Smell Exercise': 'assets/images/smell_button.png',
+      'Taste Exercise': 'assets/images/taste_button.png',
+    };
+
+    final asset = images[option.title];
+
     return GestureDetector(
       onTap: () {
         HapticFeedback.mediumImpact();
@@ -175,13 +187,12 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
           ),
         );
       },
-      child: option.title == 'Breathing Exercise'
+      child: asset != null
           ? Container(
-              // Special rendering: use a full-bleed image for the Breathing card
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                image: const DecorationImage(
-                  image: AssetImage('assets/images/breathing_button.png'),
+                image: DecorationImage(
+                  image: AssetImage(asset),
                   fit: BoxFit.cover,
                 ),
                 boxShadow: [

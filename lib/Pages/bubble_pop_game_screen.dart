@@ -218,22 +218,13 @@ class _BubblePopGameScreenState extends State<BubblePopGameScreen> {
                         elevation: 9,
                       ),
                       child: const Text(
-                        'Next',
+                        'Finish',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      // Finish session: return to menu
-                      Navigator.pop(context);
-                    },
-                    child: const Text(
-                      'Finish Session',
                     ),
                   ),
                 ],
