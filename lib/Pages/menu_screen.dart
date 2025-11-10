@@ -6,7 +6,7 @@ import 'breathing_screen.dart';
 import 'bubble_pop_game_screen.dart';
 import 'smell_screen.dart';
 import 'flashcards_screen.dart';
-import 'vibration_screen.dart';
+import 'panic_call_screen.dart';
 
 class MenuScreen extends StatefulWidget {
   const MenuScreen({super.key});
@@ -39,7 +39,7 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
       subtitle: 'Soothing haptic patterns',
       icon: Icons.vibration_rounded,
       color: AppColors.primary.withOpacity(0.8),
-      route: (startTime) => VibrationScreen(startTime: startTime),
+      route: (startTime) => PanicCallScreen(startTime: startTime),
     ),
     MenuOption(
       title: 'Bubble Pop Game',
