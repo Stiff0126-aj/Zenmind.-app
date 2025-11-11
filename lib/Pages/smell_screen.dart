@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:panicaid/Pages/menu_screen.dart';
 import '../theme/app_colors.dart';
 import 'taste_screen.dart';
 
@@ -84,7 +85,7 @@ class SmellScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     const Text(
-                      'Imagine the smell of\nLavender',
+                      'Tu red de apoyo\n en un solo lugar',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         letterSpacing: 1.3,
@@ -95,7 +96,7 @@ class SmellScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      'Or smell any available scent',
+                      'Conecta con tus seres queridos para recibir apoyo cuando más lo necesites.',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         letterSpacing: 1.0,
@@ -114,14 +115,12 @@ class SmellScreen extends StatelessWidget {
                   Container(
                     height: 50,
                     width: MediaQuery.of(context).size.width * 0.45,
-                      child: ElevatedButton(
+                    child: ElevatedButton(
                       onPressed: () {
                         // Navigate to Taste screen next in sequence
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                            builder: (_) => TasteScreen(startTime: startTime),
-                          ),
+                          MaterialPageRoute(builder: (_) => MenuScreen()),
                         );
                       },
                       style: ElevatedButton.styleFrom(
@@ -129,7 +128,7 @@ class SmellScreen extends StatelessWidget {
                         elevation: 9,
                       ),
                       child: const Text(
-                        'Next',
+                        'Menu',
                         style: TextStyle(
                           color: AppColors.textLight,
                           fontSize: 25,
@@ -137,13 +136,6 @@ class SmellScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      // Finish session: return to menu
-                      Navigator.pop(context);
-                    },
-                    child: const Text('Finish Session'),
                   ),
                 ],
               ),

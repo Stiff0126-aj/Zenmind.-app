@@ -26,11 +26,17 @@ class _PanicCallScreenState extends State<PanicCallScreen> {
     final should = await showDialog<bool?>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Emergency Call'),
-        content: Text('Would you like to call $phone?'),
+        title: const Text('Boton de pánico'),
+        content: Text('¿Desea llamar a $phone?'),
         actions: [
-          TextButton(onPressed: () => Navigator.of(context).pop(false), child: const Text('Cancel')),
-          ElevatedButton(onPressed: () => Navigator.of(context).pop(true), child: const Text('Call')),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('Cancelar'),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('Llamar'),
+          ),
         ],
       ),
     );
@@ -45,7 +51,9 @@ class _PanicCallScreenState extends State<PanicCallScreen> {
       await launchUrl(url);
     } catch (e) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Failed to place call: $e')));
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Failed to place call: $e')));
     }
   }
 
@@ -54,22 +62,22 @@ class _PanicCallScreenState extends State<PanicCallScreen> {
     final result = await showDialog<String?>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Set emergency number'),
+        title: const Text('Establecer numero de emergencia'),
         content: TextField(
           controller: controller,
           keyboardType: TextInputType.phone,
           decoration: const InputDecoration(
-            hintText: 'Enter phone number (e.g. +34123456789)',
+            hintText: 'Ingrese el numero de telefono',
           ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(null),
-            child: const Text('Cancel'),
+            child: const Text('Cancelar'),
           ),
           ElevatedButton(
             onPressed: () => Navigator.of(context).pop(controller.text.trim()),
-            child: const Text('Save'),
+            child: const Text('Guardar'),
           ),
         ],
       ),
@@ -78,7 +86,9 @@ class _PanicCallScreenState extends State<PanicCallScreen> {
     if (result != null && result.isNotEmpty) {
       setState(() => _phoneNumber = result);
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Emergency number saved')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Numero de emergencia guardado')),
+      );
     }
   }
 
@@ -99,7 +109,10 @@ class _PanicCallScreenState extends State<PanicCallScreen> {
         ),
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20.0,
+              vertical: 16.0,
+            ),
             child: Column(
               children: [
                 // Header similar to other pages
@@ -128,9 +141,10 @@ class _PanicCallScreenState extends State<PanicCallScreen> {
 
                     Expanded(
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            'Panic Call',
+                            'Boton de pánico',
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w600,
@@ -138,7 +152,7 @@ class _PanicCallScreenState extends State<PanicCallScreen> {
                             ),
                           ),
                           Text(
-                            'Call your emergency contact',
+                            'Llama a tu contacto de emergencia',
                             style: TextStyle(
                               fontSize: 12,
                               color: AppColors.textDark.withOpacity(0.7),
@@ -159,7 +173,7 @@ class _PanicCallScreenState extends State<PanicCallScreen> {
 
                 // Description
                 const Text(
-                  'Press the big button to call\n your emergency contact.',
+                  'Presiona el botón grande para llamar\n a tu contacto de emergencia.',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 16),
                 ),
@@ -204,7 +218,8 @@ class _PanicCallScreenState extends State<PanicCallScreen> {
 
                 // Phone display and actions
                 Text(
-                  _phoneNumber ?? 'No emergency number set',
+                  _phoneNumber ??
+                      'No se ha establecido un número de emergencia',
                   style: TextStyle(
                     color: AppColors.textDark.withOpacity(0.8),
                     fontWeight: FontWeight.w600,
@@ -220,14 +235,25 @@ class _PanicCallScreenState extends State<PanicCallScreen> {
                   children: [
                     TextButton(
                       onPressed: _promptSetPhone,
-                      child: const Text('Set / Change number', style: TextStyle(color: Colors.black)),
+                      child: const Text(
+                        'Establecer / Cambiar número',
+                        style: TextStyle(color: Colors.black),
+                      ),
                     ),
                     ElevatedButton(
                       onPressed: () => Navigator.pop(context),
-                      style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.primary,
+                      ),
                       child: const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 10.0),
-                        child: Text('Back to menu', style: TextStyle(fontSize: 14, color: Colors.black)),
+                        padding: EdgeInsets.symmetric(
+                          vertical: 12.0,
+                          horizontal: 10.0,
+                        ),
+                        child: Text(
+                          'Volver al menú',
+                          style: TextStyle(fontSize: 14, color: Colors.black),
+                        ),
                       ),
                     ),
                   ],

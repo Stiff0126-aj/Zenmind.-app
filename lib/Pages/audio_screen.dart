@@ -15,7 +15,8 @@ class AudioScreen extends StatefulWidget {
   _AudioScreenState createState() => _AudioScreenState();
 }
 
-class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin {
+class _AudioScreenState extends State<AudioScreen>
+    with TickerProviderStateMixin {
   int currentSoundIndex = 0;
   final AudioPlayer player = AudioPlayer();
   bool isPlaying = false;
@@ -26,12 +27,12 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
   late Animation<double> _titleAnimation;
 
   final List<String> soundTexts = [
-    'Waves',
-    'Rain',
-    'Birds',
-    'Fire',
-    'Forest',
-    'Wind'
+    'Olas',
+    'Lluvia',
+    'Pájaros',
+    'Fuego',
+    'Bosque',
+    'Viento',
   ];
 
   final List<String> sounds = [
@@ -45,21 +46,21 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
 
   // Sound-specific colors and icons
   final Map<String, Color> soundColors = {
-    'Waves': AppColors.primary,
-    'Rain': AppColors.border,
-    'Birds': AppColors.primary,
-    'Fire': AppColors.secondary,
-    'Forest': AppColors.border,
-    'Wind': AppColors.primary,
+    'Olas': AppColors.primary,
+    'Lluvia': AppColors.border,
+    'Pájaros': AppColors.primary,
+    'Fuego': AppColors.secondary,
+    'Bosque': AppColors.border,
+    'Viento': AppColors.primary,
   };
 
   final Map<String, IconData> soundIcons = {
-    'Waves': Icons.waves_rounded,
-    'Rain': Icons.grain_rounded,
-    'Birds': Icons.flutter_dash_rounded,
-    'Fire': Icons.local_fire_department_rounded,
-    'Forest': Icons.forest_rounded,
-    'Wind': Icons.air_rounded,
+    'Olas': Icons.waves_rounded,
+    'Lluvia': Icons.grain_rounded,
+    'Pájaros': Icons.flutter_dash_rounded,
+    'Fuego': Icons.local_fire_department_rounded,
+    'Bosque': Icons.forest_rounded,
+    'Viento': Icons.air_rounded,
   };
 
   @override
@@ -79,18 +80,11 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
     _fadeAnimation = Tween<double>(
       begin: 0.0,
       end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _fadeController,
-      curve: Curves.easeOut,
-    ));
+    ).animate(CurvedAnimation(parent: _fadeController, curve: Curves.easeOut));
 
-    _titleAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _titleController,
-      curve: Curves.elasticOut,
-    ));
+    _titleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _titleController, curve: Curves.elasticOut),
+    );
 
     _fadeController.forward();
     _titleController.forward();
@@ -120,7 +114,8 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;
-    final currentColor = soundColors[soundTexts[currentSoundIndex]] ?? AppColors.primary;
+    final currentColor =
+        soundColors[soundTexts[currentSoundIndex]] ?? AppColors.primary;
 
     return Scaffold(
       body: Container(
@@ -152,7 +147,11 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
                 SizedBox(height: screenHeight * 0.05),
 
                 // Audio spectrum container
-                _buildAudioSpectrumContainer(screenWidth, screenHeight, currentColor),
+                _buildAudioSpectrumContainer(
+                  screenWidth,
+                  screenHeight,
+                  currentColor,
+                ),
 
                 SizedBox(height: screenHeight * 0.06),
 
@@ -171,7 +170,6 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
 
                 // Navigation buttons
                 _buildNavigationButtons(context, screenWidth, currentColor),
-
               ],
             ),
           ),
@@ -209,9 +207,10 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
 
           // Session title
           Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'Audio Therapy',
+                'Terapia Auditiva',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
@@ -219,7 +218,7 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
                 ),
               ),
               Text(
-                'Calming sounds',
+                'Sonidos Calmantes',
                 style: TextStyle(
                   fontSize: 12,
                   color: AppColors.textDark.withOpacity(0.7),
@@ -245,7 +244,8 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
               mainAxisSize: MainAxisSize.min,
               children: [
                 Icon(
-                  soundIcons[soundTexts[currentSoundIndex]] ?? Icons.music_note_rounded,
+                  soundIcons[soundTexts[currentSoundIndex]] ??
+                      Icons.music_note_rounded,
                   size: 16,
                   color: currentColor,
                 ),
@@ -275,7 +275,7 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
           child: Column(
             children: [
               Text(
-                'Focus on',
+                'Concéntrate en',
                 style: TextStyle(
                   color: AppColors.textDark,
                   fontSize: 24,
@@ -287,7 +287,10 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
 
               // Enhanced sound name with icon
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 12,
+                ),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
@@ -310,7 +313,8 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(
-                      soundIcons[soundTexts[currentSoundIndex]] ?? Icons.music_note_rounded,
+                      soundIcons[soundTexts[currentSoundIndex]] ??
+                          Icons.music_note_rounded,
                       color: Colors.white,
                       size: 28,
                     ),
@@ -334,7 +338,11 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
     );
   }
 
-  Widget _buildAudioSpectrumContainer(double screenWidth, double screenHeight, Color currentColor) {
+  Widget _buildAudioSpectrumContainer(
+    double screenWidth,
+    double screenHeight,
+    Color currentColor,
+  ) {
     return Container(
       width: screenWidth * 0.85,
       height: screenHeight * 0.35,
@@ -361,10 +369,7 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
             offset: const Offset(0, 2),
           ),
         ],
-        border: Border.all(
-          color: currentColor.withOpacity(0.1),
-          width: 1,
-        ),
+        border: Border.all(color: currentColor.withOpacity(0.1), width: 1),
       ),
       child: Stack(
         children: [
@@ -376,10 +381,7 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
                 gradient: RadialGradient(
                   center: Alignment.center,
                   radius: 1.0,
-                  colors: [
-                    currentColor.withOpacity(0.03),
-                    Colors.transparent,
-                  ],
+                  colors: [currentColor.withOpacity(0.03), Colors.transparent],
                   stops: const [0.0, 1.0],
                 ),
               ),
@@ -387,9 +389,7 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
           ),
 
           // Audio spectrum
-          Center(
-            child: AudioSpectrumLines(isPlaying: isPlaying),
-          ),
+          Center(child: AudioSpectrumLines(isPlaying: isPlaying)),
 
           // Play state indicator
           if (!isPlaying)
@@ -428,7 +428,11 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
     );
   }
 
-  Widget _buildNavigationButtons(BuildContext context, double screenWidth, Color currentColor) {
+  Widget _buildNavigationButtons(
+    BuildContext context,
+    double screenWidth,
+    Color currentColor,
+  ) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
@@ -448,7 +452,7 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
                 Navigator.pop(context);
               },
               style: TextButton.styleFrom(
-                  backgroundColor: AppColors.surface,
+                backgroundColor: AppColors.surface,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                   side: BorderSide(
@@ -467,7 +471,7 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    'Finish Session',
+                    'Menú principal',
                     style: TextStyle(
                       color: Colors.grey[700],
                       fontSize: 16,

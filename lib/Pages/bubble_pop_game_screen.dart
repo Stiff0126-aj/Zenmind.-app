@@ -31,7 +31,12 @@ class _BubblePopGameScreenState extends State<BubblePopGameScreen> {
   List<Color> generateUniqueVividColors(int count) {
     return List.generate(count, (i) {
       double hue = (i * (360.0 / count)) % 360; // Spread hues evenly
-      return HSVColor.fromAHSV(1.0, hue, 0.95, 0.95).toColor(); // Convert HSV to Color
+      return HSVColor.fromAHSV(
+        1.0,
+        hue,
+        0.95,
+        0.95,
+      ).toColor(); // Convert HSV to Color
     })..shuffle(random); // Shuffle for randomness
   }
 
@@ -57,9 +62,11 @@ class _BubblePopGameScreenState extends State<BubblePopGameScreen> {
         );
         tries++;
         if (tries > 1000) break; // Avoid infinite loops
-      } while (bubbles.any((bubble) =>
-          (bubble.dx - newBubblePosition.dx).abs() < bubbleSize &&
-          (bubble.dy - newBubblePosition.dy).abs() < bubbleSize));
+      } while (bubbles.any(
+        (bubble) =>
+            (bubble.dx - newBubblePosition.dx).abs() < bubbleSize &&
+            (bubble.dy - newBubblePosition.dy).abs() < bubbleSize,
+      ));
 
       bubbles.add(newBubblePosition);
       bubbleNumbers.add(i);
@@ -71,7 +78,9 @@ class _BubblePopGameScreenState extends State<BubblePopGameScreen> {
   Future<void> playPopSound() async {
     final soundPath = popSounds[random.nextInt(popSounds.length)];
     try {
-      await audioPlayer.play(AssetSource(soundPath.replaceFirst('assets/', '')));
+      await audioPlayer.play(
+        AssetSource(soundPath.replaceFirst('assets/', '')),
+      );
     } catch (e) {
       // Ignore any audio errors
     }
@@ -95,7 +104,7 @@ class _BubblePopGameScreenState extends State<BubblePopGameScreen> {
     } else {
       // Show message if wrong bubble tapped
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Please pop bubble number $nextNumberToPop')),
+        SnackBar(content: Text('Explota la burbuja número $nextNumberToPop')),
       );
     }
   }
@@ -157,7 +166,7 @@ class _BubblePopGameScreenState extends State<BubblePopGameScreen> {
               ),
               child: const Center(
                 child: Text(
-                  'Pop the Bubbles\nin Order',
+                  'Explota las burbujas',
                   style: TextStyle(
                     color: Color(0xff0F073E),
                     fontSize: 30,
@@ -210,15 +219,15 @@ class _BubblePopGameScreenState extends State<BubblePopGameScreen> {
                     width: MediaQuery.of(context).size.width * 0.45,
                     child: ElevatedButton(
                       onPressed: () {
-                          // Return to menu instead of navigating forward
-                          Navigator.pop(context);
-                        },
+                        // Return to menu instead of navigating forward
+                        Navigator.pop(context);
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xff0F073E),
                         elevation: 9,
                       ),
                       child: const Text(
-                        'Finish',
+                        'Finalizar',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
@@ -247,30 +256,50 @@ class BubblePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final bubblePaint = Paint()
-      ..shader = RadialGradient(
-        center: Alignment(-0.3, -0.3), // Gradient center for glossy effect
-        radius: 0.8,
-        colors: [
-          color.withOpacity(0.97),
-          color.withOpacity(0.72),
-          Colors.white.withOpacity(0.33),
-        ],
-        stops: [0.13, 0.7, 1.0],
-      ).createShader(Rect.fromCircle(center: Offset(size.width / 2, size.height / 2), radius: size.width / 2));
+      ..shader =
+          RadialGradient(
+            center: Alignment(-0.3, -0.3), // Gradient center for glossy effect
+            radius: 0.8,
+            colors: [
+              color.withOpacity(0.97),
+              color.withOpacity(0.72),
+              Colors.white.withOpacity(0.33),
+            ],
+            stops: [0.13, 0.7, 1.0],
+          ).createShader(
+            Rect.fromCircle(
+              center: Offset(size.width / 2, size.height / 2),
+              radius: size.width / 2,
+            ),
+          );
 
     final highlightPaint = Paint()
       ..color = Colors.white.withOpacity(0.22); // Highlight overlay
 
     // Draw main bubble with radial gradient
-    canvas.drawCircle(Offset(size.width / 2, size.height / 2), size.width / 2, bubblePaint);
+    canvas.drawCircle(
+      Offset(size.width / 2, size.height / 2),
+      size.width / 2,
+      bubblePaint,
+    );
     // Draw top-left highlight
     canvas.drawOval(
-      Rect.fromLTWH(size.width * 0.18, size.height * 0.15, size.width * 0.3, size.height * 0.22),
+      Rect.fromLTWH(
+        size.width * 0.18,
+        size.height * 0.15,
+        size.width * 0.3,
+        size.height * 0.22,
+      ),
       highlightPaint,
     );
     // Draw inner bottom shine
     canvas.drawOval(
-      Rect.fromLTWH(size.width * 0.58, size.height * 0.62, size.width * 0.18, size.height * 0.10),
+      Rect.fromLTWH(
+        size.width * 0.58,
+        size.height * 0.62,
+        size.width * 0.18,
+        size.height * 0.10,
+      ),
       Paint()..color = Colors.white.withOpacity(0.12),
     );
 
@@ -287,17 +316,14 @@ class BubblePainter extends CustomPainter {
               blurRadius: 6,
               color: Colors.black.withOpacity(0.20),
               offset: Offset(1, 2),
-            )
+            ),
           ],
         ),
       ),
       textAlign: TextAlign.center,
       textDirection: TextDirection.ltr,
     );
-    textPainter.layout(
-      minWidth: 0,
-      maxWidth: size.width,
-    );
+    textPainter.layout(minWidth: 0, maxWidth: size.width);
     textPainter.paint(
       canvas,
       Offset(

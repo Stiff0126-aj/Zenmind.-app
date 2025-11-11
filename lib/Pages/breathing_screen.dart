@@ -14,8 +14,9 @@ class BreathingScreen extends StatefulWidget {
   State<BreathingScreen> createState() => _BreathingScreenState();
 }
 
-class _BreathingScreenState extends State<BreathingScreen> with TickerProviderStateMixin {
-  String _breathingText = 'INHALE';
+class _BreathingScreenState extends State<BreathingScreen>
+    with TickerProviderStateMixin {
+  String _breathingText = 'Respira . . .';
   late AnimationController _textAnimationController;
   late AnimationController _backgroundController;
   late Animation<double> _textScaleAnimation;
@@ -24,7 +25,7 @@ class _BreathingScreenState extends State<BreathingScreen> with TickerProviderSt
   // Color schemes for different breathing phases
   final Map<String, Color> _phaseColors = {
     'INHALE': AppColors.primary,
-    'HOLD': AppColors.secondary,
+    'SOSTEN': AppColors.secondary,
     'EXHALE': AppColors.border,
   };
 
@@ -45,13 +46,12 @@ class _BreathingScreenState extends State<BreathingScreen> with TickerProviderSt
     );
 
     // Text scale animation
-    _textScaleAnimation = Tween<double>(
-      begin: 1.0,
-      end: 1.1,
-    ).animate(CurvedAnimation(
-      parent: _textAnimationController,
-      curve: Curves.elasticOut,
-    ));
+    _textScaleAnimation = Tween<double>(begin: 1.0, end: 1.1).animate(
+      CurvedAnimation(
+        parent: _textAnimationController,
+        curve: Curves.elasticOut,
+      ),
+    );
 
     // Background color animation
     _backgroundColorAnimation = ColorTween(
@@ -105,8 +105,10 @@ class _BreathingScreenState extends State<BreathingScreen> with TickerProviderSt
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
-                  (_backgroundColorAnimation.value ?? _phaseColors['INHALE']!).withOpacity(0.1),
-                  (_backgroundColorAnimation.value ?? _phaseColors['INHALE']!).withOpacity(0.05),
+                  (_backgroundColorAnimation.value ?? _phaseColors['INHALE']!)
+                      .withOpacity(0.1),
+                  (_backgroundColorAnimation.value ?? _phaseColors['INHALE']!)
+                      .withOpacity(0.05),
                   AppColors.background,
                 ],
                 stops: const [0.0, 0.3, 1.0],
@@ -137,12 +139,16 @@ class _BreathingScreenState extends State<BreathingScreen> with TickerProviderSt
                             vertical: 8,
                           ),
                           decoration: BoxDecoration(
-                            color: (_backgroundColorAnimation.value ?? _phaseColors['INHALE']!)
-                                .withOpacity(0.1),
+                            color:
+                                (_backgroundColorAnimation.value ??
+                                        _phaseColors['INHALE']!)
+                                    .withOpacity(0.1),
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(
-                              color: (_backgroundColorAnimation.value ?? _phaseColors['INHALE']!)
-                                  .withOpacity(0.3),
+                              color:
+                                  (_backgroundColorAnimation.value ??
+                                          _phaseColors['INHALE']!)
+                                      .withOpacity(0.3),
                               width: 1,
                             ),
                           ),
@@ -151,7 +157,9 @@ class _BreathingScreenState extends State<BreathingScreen> with TickerProviderSt
                             style: TextStyle(
                               fontSize: 28,
                               fontWeight: FontWeight.w700,
-                              color: _backgroundColorAnimation.value ?? _phaseColors['INHALE'],
+                              color:
+                                  _backgroundColorAnimation.value ??
+                                  _phaseColors['INHALE'],
                               letterSpacing: 2,
                             ),
                           ),
@@ -215,7 +223,7 @@ class _BreathingScreenState extends State<BreathingScreen> with TickerProviderSt
           Column(
             children: [
               Text(
-                'Breathing Exercise',
+                'Respiración Guiada',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
@@ -223,7 +231,7 @@ class _BreathingScreenState extends State<BreathingScreen> with TickerProviderSt
                 ),
               ),
               Text(
-                'Find your calm',
+                'Encuentra tu calma',
                 style: TextStyle(
                   fontSize: 12,
                   color: AppColors.textDark.withOpacity(0.7),
@@ -314,7 +322,7 @@ class BreathingPhases extends StatelessWidget {
             const Expanded(
               child: BreathingPhaseWidget(
                 duration: '3',
-                phase: 'HOLD',
+                phase: 'SOSTEN',
                 color: AppColors.secondary,
                 icon: Icons.pause_rounded,
               ),
@@ -368,11 +376,7 @@ class BreathingPhaseWidget extends StatelessWidget {
             color: color.withOpacity(0.1),
             borderRadius: BorderRadius.circular(12),
           ),
-          child: Icon(
-            icon,
-            color: color,
-            size: 24,
-          ),
+          child: Icon(icon, color: color, size: 24),
         ),
 
         const SizedBox(height: 8),
@@ -389,7 +393,7 @@ class BreathingPhaseWidget extends StatelessWidget {
 
         // Seconds label
         Text(
-          'Seconds',
+          'Segundos',
           style: TextStyle(
             fontSize: 10,
             color: AppColors.textDark.withOpacity(0.7),
@@ -452,11 +456,17 @@ class NavigationButtons extends StatelessWidget {
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
               child: const Text(
-                'Next: Vibration',
-                style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),
+                'Ir a Vibración',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
           ),
@@ -492,7 +502,7 @@ class NavigationButtons extends StatelessWidget {
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    'Finish Session',
+                    'Finalizar Sesión',
                     style: TextStyle(
                       color: AppColors.textDark,
                       fontSize: 16,

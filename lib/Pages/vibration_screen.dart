@@ -17,7 +17,8 @@ class VibrationScreen extends StatefulWidget {
   _VibrationScreenState createState() => _VibrationScreenState();
 }
 
-class _VibrationScreenState extends State<VibrationScreen> with TickerProviderStateMixin {
+class _VibrationScreenState extends State<VibrationScreen>
+    with TickerProviderStateMixin {
   bool _vibrating = false;
   late RiveAnimationController _riveController;
 
@@ -54,26 +55,15 @@ class _VibrationScreenState extends State<VibrationScreen> with TickerProviderSt
     _fadeAnimation = Tween<double>(
       begin: 0.0,
       end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _fadeController,
-      curve: Curves.easeOut,
-    ));
+    ).animate(CurvedAnimation(parent: _fadeController, curve: Curves.easeOut));
 
-    _pulseAnimation = Tween<double>(
-      begin: 1.0,
-      end: 1.05,
-    ).animate(CurvedAnimation(
-      parent: _pulseController,
-      curve: Curves.easeInOut,
-    ));
+    _pulseAnimation = Tween<double>(begin: 1.0, end: 1.05).animate(
+      CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut),
+    );
 
-    _titleAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _titleController,
-      curve: Curves.elasticOut,
-    ));
+    _titleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _titleController, curve: Curves.elasticOut),
+    );
 
     // Start animations
     _fadeController.forward();
@@ -145,7 +135,10 @@ class _VibrationScreenState extends State<VibrationScreen> with TickerProviderSt
               physics: const BouncingScrollPhysics(),
               child: ConstrainedBox(
                 constraints: BoxConstraints(
-                  minHeight: screenHeight - MediaQuery.of(context).padding.top - MediaQuery.of(context).padding.bottom,
+                  minHeight:
+                      screenHeight -
+                      MediaQuery.of(context).padding.top -
+                      MediaQuery.of(context).padding.bottom,
                 ),
                 child: IntrinsicHeight(
                   child: Column(
@@ -224,7 +217,7 @@ class _VibrationScreenState extends State<VibrationScreen> with TickerProviderSt
           Column(
             children: [
               Text(
-                'Vibration Therapy',
+                'Terapia de Vibración',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
@@ -232,7 +225,7 @@ class _VibrationScreenState extends State<VibrationScreen> with TickerProviderSt
                 ),
               ),
               Text(
-                'Feel the rhythm',
+                'Siente el ritmo',
                 style: TextStyle(
                   fontSize: 12,
                   color: AppColors.textDark.withOpacity(0.6),
@@ -247,10 +240,12 @@ class _VibrationScreenState extends State<VibrationScreen> with TickerProviderSt
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
-              color: (_vibrating ? AppColors.primary : AppColors.secondary).withOpacity(0.1),
+              color: (_vibrating ? AppColors.primary : AppColors.secondary)
+                  .withOpacity(0.1),
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: (_vibrating ? AppColors.primary : AppColors.secondary).withOpacity(0.3),
+                color: (_vibrating ? AppColors.primary : AppColors.secondary)
+                    .withOpacity(0.3),
                 width: 1,
               ),
             ),
@@ -260,7 +255,9 @@ class _VibrationScreenState extends State<VibrationScreen> with TickerProviderSt
                 Icon(
                   _vibrating ? Icons.vibration_rounded : Icons.pause_rounded,
                   size: 16,
-                  color: _vibrating ? AppColors.primary : AppColors.textDark.withOpacity(0.6),
+                  color: _vibrating
+                      ? AppColors.primary
+                      : AppColors.textDark.withOpacity(0.6),
                 ),
                 const SizedBox(width: 4),
                 Text(
@@ -268,7 +265,9 @@ class _VibrationScreenState extends State<VibrationScreen> with TickerProviderSt
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
-                    color: _vibrating ? AppColors.primary : AppColors.textDark.withOpacity(0.6),
+                    color: _vibrating
+                        ? AppColors.primary
+                        : AppColors.textDark.withOpacity(0.6),
                   ),
                 ),
               ],
@@ -288,7 +287,7 @@ class _VibrationScreenState extends State<VibrationScreen> with TickerProviderSt
           child: Column(
             children: [
               Text(
-                'Focus on',
+                'Centra tu atención en ',
                 style: TextStyle(
                   color: Colors.grey[800],
                   fontSize: 24,
@@ -300,13 +299,13 @@ class _VibrationScreenState extends State<VibrationScreen> with TickerProviderSt
 
               // Enhanced vibration title
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 12,
+                ),
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(
-                    colors: [
-                      Color(0xFF9C27B0),
-                      Color(0xFF673AB7),
-                    ],
+                    colors: [Color(0xFF9C27B0), Color(0xFF673AB7)],
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                   ),
@@ -329,7 +328,7 @@ class _VibrationScreenState extends State<VibrationScreen> with TickerProviderSt
                     ),
                     SizedBox(width: 12),
                     Text(
-                      'The Vibration',
+                      'La Vibración',
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.w700,
@@ -438,8 +437,9 @@ class _VibrationScreenState extends State<VibrationScreen> with TickerProviderSt
         ),
         boxShadow: [
           BoxShadow(
-            color: (_vibrating ? const Color(0xFFFF5722) : const Color(0xFF4CAF50))
-                .withOpacity(0.4),
+            color:
+                (_vibrating ? const Color(0xFFFF5722) : const Color(0xFF4CAF50))
+                    .withOpacity(0.4),
             blurRadius: 20,
             offset: const Offset(0, 8),
           ),
@@ -471,14 +471,12 @@ class _VibrationScreenState extends State<VibrationScreen> with TickerProviderSt
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            Icons.info_outline_rounded,
-            size: 16,
-            color: Colors.grey[600],
-          ),
+          Icon(Icons.info_outline_rounded, size: 16, color: Colors.grey[600]),
           const SizedBox(width: 8),
           Text(
-            _vibrating ? 'Vibrating every 3 seconds' : 'Tap play to start vibration',
+            _vibrating
+                ? 'Vibrando cada 3 segundos'
+                : 'Toca reproducir para iniciar la vibración',
             style: TextStyle(
               fontSize: 12,
               color: Colors.grey[600],
@@ -537,7 +535,7 @@ class _VibrationScreenState extends State<VibrationScreen> with TickerProviderSt
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Continue to Taste',
+                    'Red de apoyo',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -588,7 +586,7 @@ class _VibrationScreenState extends State<VibrationScreen> with TickerProviderSt
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    'Finish Session',
+                    'Finalizar Sesión',
                     style: TextStyle(
                       color: AppColors.textDark,
                       fontSize: 16,
