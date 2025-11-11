@@ -112,20 +112,27 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
                 children: [
                   const SizedBox(height: 20),
                   
-                  // Header
-                  Text(
-                    'ZenMind',
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.textDark,
+                  // Header Image - Full Width
+                  Container(
+                    width: double.infinity,
+                    height: 120,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      image: const DecorationImage(
+                        image: AssetImage('assets/images/logo/zenmind_logo.png'),
+                        fit: BoxFit.cover,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.border.withOpacity(0.2),
+                          blurRadius: 12,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
                     ),
                   ),
-                  
-      
-                  
 
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 24),
 
                   // Daily Check Button
                   Container(
