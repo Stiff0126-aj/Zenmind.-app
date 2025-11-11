@@ -16,7 +16,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
     Contact(name: 'Papá', phone: '+34 923 456 789', icon: Icons.man_rounded, color: const Color(0xFFB4D8E8)),
     Contact(name: 'Hermana', phone: '+34 934 567 890', icon: Icons.girl_rounded, color: const Color(0xFFC8E8B4)),
     Contact(name: 'Mejor Amiga', phone: '+34 945 678 901', icon: Icons.favorite_rounded, color: const Color(0xFFE8D4B4)),
-    Contact(name: 'Terapeuta', phone: '+34 956 789 012', icon: Icons.medical_services_rounded, color: const Color(0xFFD4B4E8)),
+    Contact(name: 'Psicologa', phone: '+34 956 789 012', icon: Icons.medical_services_rounded, color: const Color(0xFFD4B4E8)),
     Contact(name: 'Línea de Crisis', phone: '+34 024', icon: Icons.call_rounded, color: const Color(0xFFE8B4B4)),
   ];
 

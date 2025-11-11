@@ -122,13 +122,50 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
                     ),
                   ),
                   
-                  const SizedBox(height: 8),
+      
                   
-                  Text(
-                    'Choose your calming technique',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: AppColors.textDark.withOpacity(0.8),
+
+                  const SizedBox(height: 20),
+
+                  // Daily Check Button
+                  Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: AppColors.primary.withOpacity(0.15),
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        color: AppColors.primary.withOpacity(0.3),
+                        width: 2,
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Daily Check',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.primary,
+                            ),
+                          ),
+                          Container(
+                            width: 32,
+                            height: 32,
+                            decoration: BoxDecoration(
+                              color: AppColors.primary,
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(
+                              Icons.check_rounded,
+                              color: Colors.white,
+                              size: 18,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
 
