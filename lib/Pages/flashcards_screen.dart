@@ -207,6 +207,7 @@ class _FlashcardsScreenState extends State<FlashcardsScreen>
 
   Widget _buildCardFront(String text) {
     return _buildCardBase(
+      backgroundColor: AppColors.surface,
       child: Text(
         text,
         textAlign: TextAlign.center,
@@ -221,6 +222,7 @@ class _FlashcardsScreenState extends State<FlashcardsScreen>
 
   Widget _buildCardBack(String text) {
     return _buildCardBase(
+      backgroundColor: AppColors.primary,
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Text(
@@ -229,30 +231,30 @@ class _FlashcardsScreenState extends State<FlashcardsScreen>
           style: TextStyle(
             fontSize: 16,
             height: 1.6,
-            color: AppColors.textDark.withOpacity(0.9),
+            color: Colors.white.withOpacity(0.95),
           ),
         ),
       ),
     );
   }
 
-  Widget _buildCardBase({required Widget child}) {
+  Widget _buildCardBase({required Widget child, Color? backgroundColor}) {
     return Container(
       width: 320,
       height: 420,
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: backgroundColor ?? AppColors.surface,
         borderRadius: BorderRadius.circular(28),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withOpacity(0.25),
+            color: (backgroundColor ?? AppColors.surface).withOpacity(0.25),
             blurRadius: 20,
             offset: const Offset(0, 10),
           ),
         ],
         border: Border.all(
-          color: AppColors.primary.withOpacity(0.2),
+          color: (backgroundColor ?? AppColors.surface).withOpacity(0.2),
           width: 1.5,
         ),
       ),

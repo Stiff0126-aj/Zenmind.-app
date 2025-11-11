@@ -4,9 +4,10 @@ import '../theme/app_colors.dart';
 import 'audio_screen.dart';
 import 'breathing_screen.dart';
 import 'bubble_pop_game_screen.dart';
-import 'smell_screen.dart';
 import 'flashcards_screen.dart';
 import 'panic_call_screen.dart';
+import 'contacts_screen.dart';
+import 'daily_check_screen.dart';
 
 class MenuScreen extends StatefulWidget {
   const MenuScreen({super.key});
@@ -16,73 +17,68 @@ class MenuScreen extends StatefulWidget {
 }
 
 class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
-  late AnimationController _fadeController;
-  late Animation<double> _fadeAnimation;
+  late final AnimationController _fadeController;
+  late final Animation<double> _fadeAnimation;
 
-  final List<MenuOption> menuOptions = [
-    MenuOption(
-      title: 'Breathing Exercise',
-      subtitle: 'Guided breathing techniques',
-      icon: Icons.air_rounded,
-      color: AppColors.primary,
-      route: (startTime) => BreathingScreen(startTime: startTime),
-    ),
-    MenuOption(
-      title: 'Calming Sounds',
-      subtitle: 'Relaxing audio therapy',
-      icon: Icons.music_note_rounded,
-      color: AppColors.primary.withOpacity(0.9),
-      route: (startTime) => AudioScreen(startTime: startTime),
-    ),
-    MenuOption(
-      title: 'Vibration Therapy',
-      subtitle: 'Soothing haptic patterns',
-      icon: Icons.vibration_rounded,
-      color: AppColors.primary.withOpacity(0.8),
-      route: (startTime) => PanicCallScreen(startTime: startTime),
-    ),
-    MenuOption(
-      title: 'Bubble Pop Game',
-      subtitle: 'Interactive distraction',
-      icon: Icons.bubble_chart_rounded,
-      color: AppColors.primary.withOpacity(0.85),
-      route: (startTime) => BubblePopGameScreen(),
-    ),
-    MenuOption(
-      title: 'Smell Exercise',
-      subtitle: 'Mindful scent awareness',
-      icon: Icons.local_florist_rounded,
-      color: AppColors.primary.withOpacity(0.75),
-      route: (startTime) => SmellScreen(startTime: startTime),
-    ),
-    // 'Taste Exercise' removed from menu per user request
-    MenuOption(
-      title: 'Flash Cards',
-      subtitle: 'Learn the PAP Protocol',
-      icon: Icons.style_rounded,
-      color: AppColors.primary.withOpacity(0.7),
-      route: (startTime) => const FlashcardsScreen(),
-  ),
-
-  ];
+  final List<MenuOption> menuOptions = [];
 
   @override
   void initState() {
     super.initState();
+
+    // initialize animation
     _fadeController = AnimationController(
-      duration: const Duration(milliseconds: 1000),
       vsync: this,
+      duration: const Duration(milliseconds: 400),
     );
-
-    _fadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _fadeController,
-      curve: Curves.easeOut,
-    ));
-
+    _fadeAnimation = CurvedAnimation(parent: _fadeController, curve: Curves.easeIn);
     _fadeController.forward();
+
+    // populate menu options
+    menuOptions.addAll([
+      MenuOption(
+        title: 'Breathing Exercise',
+        subtitle: 'Guided breathing techniques',
+        icon: Icons.air_rounded,
+        color: AppColors.primary,
+        route: (startTime) => BreathingScreen(startTime: startTime),
+      ),
+      MenuOption(
+        title: 'Calming Sounds',
+        subtitle: 'Soothing audio tracks',
+        icon: Icons.music_note_rounded,
+        color: AppColors.secondary,
+        route: (startTime) => AudioScreen(startTime: startTime),
+      ),
+      MenuOption(
+        title: 'Vibration Therapy',
+        subtitle: 'Gentle vibration patterns',
+        icon: Icons.vibration,
+        color: AppColors.border,
+        route: (startTime) => PanicCallScreen(startTime: startTime),
+      ),
+      MenuOption(
+        title: 'Bubble Pop Game',
+        subtitle: 'Quick distraction game',
+        icon: Icons.bubble_chart,
+        color: Colors.pink,
+        route: (startTime) => BubblePopGameScreen(),
+      ),
+      MenuOption(
+        title: 'Smell Exercise',
+        subtitle: 'Choose a comforting scent',
+        icon: Icons.spa,
+        color: Colors.orange,
+        route: (startTime) => ContactsScreen(startTime: startTime),
+      ),
+      MenuOption(
+        title: 'Flash Cards',
+        subtitle: 'Coping strategy reminders',
+        icon: Icons.style,
+        color: Colors.teal,
+        route: (startTime) => FlashcardsScreen(),
+      ),
+    ]);
   }
 
   @override
@@ -94,62 +90,109 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: AppColors.backgroundGradient,
-          ),
-        ),
-        child: SafeArea(
-          child: FadeTransition(
-            opacity: _fadeAnimation,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      backgroundColor: AppColors.background,
+      body: SafeArea(
+        child: FadeTransition(
+          opacity: _fadeAnimation,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 20),
-                  
-                  // Header
-                  Text(
-                    'ZenMind',
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.textDark,
-                    ),
-                  ),
-                  
-                  const SizedBox(height: 8),
-                  
-                  Text(
-                    'Choose your calming technique',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: AppColors.textDark.withOpacity(0.8),
-                    ),
-                  ),
+                  const SizedBox(height: 12),
 
-                  const SizedBox(height: 30),
-
-                  // Grid of options
-                  Expanded(
-                    child: GridView.builder(
-                      padding: const EdgeInsets.only(bottom: 20),
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 15,
-                        mainAxisSpacing: 15,
-                        childAspectRatio: 0.85,
+                  // Header Image - Full Width
+                  Container(
+                    width: double.infinity,
+                    height: 120,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      image: const DecorationImage(
+                        image: AssetImage('assets/images/logo/zenmind_logo.png'),
+                        fit: BoxFit.cover,
                       ),
-                      itemCount: menuOptions.length,
-                      itemBuilder: (context, index) {
-                        final option = menuOptions[index];
-                        return _buildOptionCard(option);
-                      },
                     ),
+                  ),
+
+                  const SizedBox(height: 24),
+
+                  // Daily Check Button (navega a DailyCheckScreen)
+                  InkWell(
+                    borderRadius: BorderRadius.circular(20),
+                    onTap: () {
+                      HapticFeedback.selectionClick();
+                      Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder: (context, animation, secondaryAnimation) => const DailyCheckScreen(),
+                          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                            return FadeTransition(opacity: animation, child: child);
+                          },
+                          transitionDuration: const Duration(milliseconds: 300),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: AppColors.primary.withOpacity(0.15),
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(
+                          color: AppColors.primary.withOpacity(0.3),
+                          width: 2,
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Daily Check',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.primary,
+                              ),
+                            ),
+                            Container(
+                              width: 32,
+                              height: 32,
+                              decoration: BoxDecoration(
+                                color: AppColors.primary,
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(
+                                Icons.check_rounded,
+                                color: Colors.white,
+                                size: 18,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 24),
+
+                  // Grid of options (shrinkWrapped so it scrolls with the page)
+                  GridView.builder(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 15,
+                      mainAxisSpacing: 15,
+                      childAspectRatio: 0.85,
+                    ),
+                    itemCount: menuOptions.length,
+                    itemBuilder: (context, index) {
+                      final option = menuOptions[index];
+                      return _buildOptionCard(option);
+                    },
                   ),
                 ],
               ),
@@ -167,7 +210,7 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
       'Calming Sounds': 'assets/images/calming_sounds_button.png',
       'Vibration Therapy': 'assets/images/vibration_button.png',
       'Bubble Pop Game': 'assets/images/bubble_pop_button.png',
-  'Smell Exercise': 'assets/images/smell_button.png',
+      'Smell Exercise': 'assets/images/smell_button.png',
       'Flash Cards': 'assets/images/flashcards_button.png',
     };
 
@@ -180,8 +223,7 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
         Navigator.push(
           context,
           PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) =>
-                option.route(startTime),
+            pageBuilder: (context, animation, secondaryAnimation) => option.route(startTime),
             transitionsBuilder: (context, animation, secondaryAnimation, child) {
               return FadeTransition(opacity: animation, child: child);
             },
