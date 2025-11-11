@@ -4,9 +4,9 @@ import '../theme/app_colors.dart';
 import 'audio_screen.dart';
 import 'breathing_screen.dart';
 import 'bubble_pop_game_screen.dart';
-import 'smell_screen.dart';
 import 'flashcards_screen.dart';
 import 'panic_call_screen.dart';
+import 'contacts_screen.dart';
 
 class MenuScreen extends StatefulWidget {
   const MenuScreen({super.key});
@@ -53,7 +53,7 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
       subtitle: 'Mindful scent awareness',
       icon: Icons.local_florist_rounded,
       color: AppColors.primary.withOpacity(0.75),
-      route: (startTime) => SmellScreen(startTime: startTime),
+      route: (startTime) => ContactsScreen(startTime: startTime),
     ),
     // 'Taste Exercise' removed from menu per user request
     MenuOption(
